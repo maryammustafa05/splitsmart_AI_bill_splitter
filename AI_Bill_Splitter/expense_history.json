@@ -1,0 +1,377 @@
+[
+  {
+    "id": "aaee2a06-4e3a-4565-b055-8b77e65cc3df",
+    "date": "2026-04-25 09:06:09",
+    "type": "manual",
+    "split_type": "equal",
+    "num_people": 3,
+    "people_names": [
+      "Maryam",
+      "Umaima",
+      "Rehma"
+    ],
+    "items": [
+      {
+        "name": "Biryani",
+        "price": 650.0,
+        "quantity": 2
+      },
+      {
+        "name": "Pepsi",
+        "price": 150.0,
+        "quantity": 3
+      },
+      {
+        "name": "Naan",
+        "price": 50.0,
+        "quantity": 6
+      }
+    ],
+    "tax": 100.0,
+    "tip": 50.0,
+    "summary": [
+      {
+        "name": "Maryam",
+        "amount": 733.33
+      },
+      {
+        "name": "Umaima",
+        "amount": 733.33
+      },
+      {
+        "name": "Rehma",
+        "amount": 733.33
+      }
+    ],
+    "explanation": "To determine how much each person owes, let's break down the bill step by step.\n\n### Step 1: Calculate the Subtotal of All Items\nFirst, we calculate the total cost of all the items ordered:\n- Biryani: 2 * Rs. 650.0 = Rs. 1300.0\n- Pepsi: 3 * Rs. 150.0 = Rs. 450.0\n- Naan: 6 * Rs. 50.0 = Rs. 300.0\n\nAdding these together gives us the subtotal:\nRs. 1300.0 + Rs. 450.0 + Rs. 300.0 = Rs. 2050.0\n\n### Step 2: Add Tax and Tip\nNext, we add the tax and tip to the subtotal to get the total bill amount:\n- Subtotal: Rs. 2050.0\n- Tax: Rs. 100.0\n- Tip: Rs. 50.0\n\nTotal bill amount = Subtotal + Tax + Tip\n= Rs. 2050.0 + Rs. 100.0 + Rs. 50.0\n= Rs. 2200.0\n\n### Step 3: Split the Total Based on the Split Type\nSince the split type is \"equal\", we divide the total bill amount by the number of people to find out how much each person owes:\nNumber of people = 3\nTotal bill amount = Rs. 2200.0\n\nAmount each person owes = Total bill amount / Number of people\n= Rs. 2200.0 / 3\n= Rs. 733.33\n\n### Explanation for Each Person\nGiven that there are three people - Maryam, Umaima, and Rehma - and the bill is to be split equally, each person owes the same amount. The calculation does not depend on who ordered what because the split type is \"equal\". Therefore, regardless of the individual items ordered, the total bill is divided equally among all three.\n\nSo, Maryam owes Rs. 733.33, Umaima owes Rs. 733.33, and Rehma owes Rs. 733.33. This is because the total bill amount of Rs. 2200.0 is divided equally among the three of them."
+  },
+  {
+    "id": "04632e39-d5d1-4103-a6d7-efdca0a361cd",
+    "date": "2026-04-25 09:22:02",
+    "type": "manual",
+    "split_type": "equal",
+    "num_people": 4,
+    "people_names": [
+      "Maryam",
+      "Umaima",
+      "Maria",
+      "Rehma"
+    ],
+    "items": [
+      {
+        "name": "biryani",
+        "price": 150.0,
+        "quantity": 1
+      },
+      {
+        "name": "pasta",
+        "price": 200.0,
+        "quantity": 2
+      }
+    ],
+    "tax": 40.0,
+    "tip": 0.0,
+    "summary": [
+      {
+        "name": "Maryam",
+        "amount": 147.5
+      },
+      {
+        "name": "Umaima",
+        "amount": 147.5
+      },
+      {
+        "name": "Maria",
+        "amount": 147.5
+      },
+      {
+        "name": "Rehma",
+        "amount": 147.5
+      }
+    ],
+    "explanation": "To calculate how much each person owes, let's follow the steps:\n\n1. **Calculate the subtotal of all items:**\n   - Biryani: Rs. 150.0 x 1 = Rs. 150.0\n   - Pasta: Rs. 200.0 x 2 = Rs. 400.0\n   - Subtotal: Rs. 150.0 + Rs. 400.0 = Rs. 550.0\n\n2. **Add tax and tip:**\n   - Tax: Rs. 40.0\n   - Tip: Rs. 0.0 (since the tip is zero, we don't need to add anything)\n   - Total bill: Subtotal + Tax + Tip = Rs. 550.0 + Rs. 40.0 + Rs. 0.0 = Rs. 590.0\n\n3. **Split the total based on the split type (equal):**\n   Since the split type is equal, we will divide the total bill by the number of people.\n   - Number of people: 4\n   - Total bill: Rs. 590.0\n   - Amount each person owes: Rs. 590.0 / 4 = Rs. 147.50\n\n4. **For each person, state exactly how much they owe and why:**\n   - **Maryam** owes Rs. 147.50 because the total bill is being split equally among 4 people.\n   - **Umaima** owes Rs. 147.50 for the same reason.\n   - **Maria** owes Rs. 147.50 as the bill is divided equally, regardless of who ordered what.\n   - **Rehma** owes Rs. 147.50 since the split type is equal, making everyone's share the same.\n\n5. **Friendly explanation:**\n   Hello, everyone. To calculate how much each of you owes, we first added up the cost of all the items you ordered, which came to Rs. 550.0. Then, we added the tax of Rs. 40.0. Since there's no tip, we didn't add anything else. The total bill is Rs. 590.0. Because you've chosen to split the bill equally, we divide this total by the number of people, which is 4. This means each of you owes Rs. 147.50. It's that simple! Everyone pays an equal share, regardless of who ordered what."
+  },
+  {
+    "id": "8a73058e-e725-4a7a-b9df-d866e0a9a3db",
+    "date": "2026-04-25 09:22:26",
+    "type": "image",
+    "split_type": "equal",
+    "num_people": 2,
+    "people_names": [
+      "umaima",
+      "rehma"
+    ],
+    "summary": [
+      {
+        "name": "umaima",
+        "amount": 16.05
+      },
+      {
+        "name": "rehma",
+        "amount": 16.05
+      }
+    ],
+    "explanation": "**Receipt Details and Bill Splitting Calculation**\n\nI'd be happy to help you split the bill.\n\n### Step 1: List All Items, Quantities, and Prices\n\nHere are the items, their quantities, and prices:\n\n* Cheese Burger: 4 pieces, $5.99 each\n* Soda: 4 pieces, $0.49 each\n* Cinnamon Bun: 2 pieces, $1.00 each\n\n### Step 2: Identify Tax and Tip\n\nThe receipt shows:\n* Food Tax: $2.90\n* Sales Tax: $1.28\nThere is no tip mentioned on the receipt.\n\n### Step 3: Calculate the Total\n\nHere's the calculation:\n\n* Net Subtotal: $27.92\n* Food Tax: $2.90\n* Sales Tax: $1.28\n* **Total to Pay: $32.10**\n\n### Step 4: Split the Bill\n\nYou'd like to split the bill equally between 2 people: umaima and rehma.\n\n### Step 5: Calculate Each Person's Share\n\nTo split the bill equally, we'll divide the **Total to Pay** by 2:\n\n$32.10 ÷ 2 = **$16.05 per person**\n\n### Explanation\n\nSince the split type is equal, both umaima and rehma will pay the same amount, which is $16.05 each. This is because the total bill is $32.10, and dividing it by 2 people results in an equal share of $16.05.\n\nSo, umaima owes $16.05 and rehma owes $16.05."
+  },
+  {
+    "id": "669adee5-5997-413d-8e38-7369301da25f",
+    "date": "2026-04-25 09:24:44",
+    "type": "manual",
+    "split_type": "equal",
+    "num_people": 3,
+    "people_names": [
+      "Maryam",
+      "Umaima",
+      "Rehma"
+    ],
+    "items": [
+      {
+        "name": "biryani",
+        "price": 150.0,
+        "quantity": 1
+      },
+      {
+        "name": "pasta",
+        "price": 200.0,
+        "quantity": 2
+      },
+      {
+        "name": "zinger",
+        "price": 1000.0,
+        "quantity": 2
+      },
+      {
+        "name": "drinks",
+        "price": 45.0,
+        "quantity": 1
+      }
+    ],
+    "tax": 99.0,
+    "tip": 0.0,
+    "summary": [
+      {
+        "name": "Maryam",
+        "amount": 898.0
+      },
+      {
+        "name": "Umaima",
+        "amount": 898.0
+      },
+      {
+        "name": "Rehma",
+        "amount": 898.0
+      }
+    ],
+    "explanation": "Let's break down the bill and calculate how much each person owes. \n\nFirst, we need to calculate the subtotal of all items:\n- Biryani: Rs. 150.0 x 1 = Rs. 150.0\n- Pasta: Rs. 200.0 x 2 = Rs. 400.0\n- Zinger: Rs. 1000.0 x 2 = Rs. 2000.0\n- Drinks: Rs. 45.0 x 1 = Rs. 45.0\nThe subtotal is: Rs. 150.0 + Rs. 400.0 + Rs. 2000.0 + Rs. 45.0 = Rs. 2595.0\n\nNext, we add the tax and tip to the subtotal:\nTax: Rs. 99.0\nTip: Rs. 0.0\nThe total tax and tip is: Rs. 99.0 + Rs. 0.0 = Rs. 99.0\nThe new total is: Rs. 2595.0 (subtotal) + Rs. 99.0 (tax and tip) = Rs. 2694.0\n\nNow, since the split type is 'equal', we will divide the total amount equally among the 3 people:\nTotal amount: Rs. 2694.0\nNumber of people: 3\nEach person's share: Rs. 2694.0 / 3 = Rs. 898.0\n\nSo, here's how much each person owes and why:\n- Maryam owes Rs. 898.0 because the bill is being split equally among 3 people.\n- Umaima owes Rs. 898.0 for the same reason - the total amount is divided by 3.\n- Rehma owes Rs. 898.0 as she is also one of the 3 people splitting the bill equally.\n\nIn simple terms, since you all decided to split the bill equally, you'll each pay one-third of the total amount, which is Rs. 898.0."
+  },
+  {
+    "id": "ab7744c3-80e6-49ff-bcfe-537042590f9b",
+    "date": "2026-04-25 09:25:41",
+    "type": "image",
+    "split_type": "itemized",
+    "num_people": 3,
+    "people_names": [
+      "umaima",
+      "rehma",
+      "maryan"
+    ],
+    "summary": [
+      {
+        "name": "umaima",
+        "amount": 10.71
+      },
+      {
+        "name": "rehma",
+        "amount": 10.71
+      },
+      {
+        "name": "maryan",
+        "amount": 10.71
+      }
+    ],
+    "explanation": "**Step 1: List all items, their quantities, and prices from the receipt**\n\nHere is the list of items:\n\n* Cheese Burger: 4 pieces, $5.99 each\n* Soda: 4 pieces, $0.49 each\n* Cinnamon Bun: 2 pieces, $1.00 each\n\n**Step 2: Identify tax and tip if present**\n\nThe receipt shows:\n- Food Tax: $2.90\n- Sales Tax: $1.28\nThere is no tip present.\n\n**Step 3: Calculate the total**\n\nHere are the calculations:\n\n* Cheese Burger: 4 x $5.99 = $23.96\n* Soda: 4 x $0.49 = $1.96\n* Cinnamon Bun: 2 x $1.00 = $2.00\n* Net Subtotal: $23.96 + $1.96 + $2.00 = $27.92\n* Total Tax: $2.90 + $1.28 = $4.18\n* Total: $27.92 + $4.18 = $32.10\n\n**Step 4: Split the bill based on the split type (Itemized)**\n\nSince the split type is itemized, we will divide each item's cost by the number of people (3).\n\n* Cheese Burger: $23.96 ÷ 3 = $7.99 per person\n* Soda: $1.96 ÷ 3 = $0.65 per person\n* Cinnamon Bun: $2.00 ÷ 3 = $0.67 per person\n* Food Tax: $2.90 ÷ 3 = $0.97 per person\n* Sales Tax: $1.28 ÷ 3 = $0.43 per person\n\n**Step 5: Explain clearly how much each person owes and why**\n\nThe total bill is $32.10. Since we are splitting the bill itemized, each person will pay for their share of each item.\n\nHere's the breakdown:\n\n* umaima: \n  - Cheese Burger: $7.99\n  - Soda: $0.65\n  - Cinnamon Bun: $0.67\n  - Food Tax: $0.97\n  - Sales Tax: $0.43\n  Total: $7.99 + $0.65 + $0.67 + $0.97 + $0.43 = $10.71\n* rehma: \n  - Cheese Burger: $7.99\n  - Soda: $0.65\n  - Cinnamon Bun: $0.67\n  - Food Tax: $0.97\n  - Sales Tax: $0.43\n  Total: $7.99 + $0.65 + $0.67 + $0.97 + $0.43 = $10.71\n* maryan: \n  - Cheese Burger: $7.99\n  - Soda: $0.65\n  - Cinnamon Bun: $0.67\n  - Food Tax: $0.97\n  - Sales Tax: $0.43\n  Total: $7.99 + $0.65 + $0.67 + $0.97 + $0.43 = $10.71\n\nEach person owes $10.71. This is because we divided each item's cost by 3, and then added the tax amounts divided by 3. This way, each person pays for their fair share of the items and taxes."
+  },
+  {
+    "id": "dc3384c5-9bb5-44c0-aaca-994b779d324f",
+    "date": "2026-04-25 09:54:27",
+    "type": "manual",
+    "split_type": "equal",
+    "num_people": 2,
+    "people_names": [
+      "maryam umaima"
+    ],
+    "items": [
+      {
+        "name": "biryani",
+        "price": 150.0,
+        "quantity": 1
+      }
+    ],
+    "tax": 120.0,
+    "tip": 0.0,
+    "summary": [
+      {
+        "name": "Maryam",
+        "amount": 135
+      },
+      {
+        "name": "Umayma",
+        "amount": 135
+      }
+    ],
+    "explanation": "Let's break down the bill and calculate how much each person owes.\n\nFirst, we need to calculate the subtotal of all items. The only item is biryani, which costs Rs. 150.0. Since there's only one item, the subtotal is Rs. 150.0.\n\nNext, we add the tax and tip to the subtotal. The tax is Rs. 120.0, and the tip is Rs. 0.0. So, the total amount due is:\nRs. 150.0 (subtotal) + Rs. 120.0 (tax) + Rs. 0.0 (tip) = Rs. 270.0\n\nSince the split type is equal, we'll divide the total amount equally between the two people: Maryam and Umayma.\n\nThe total amount due is Rs. 270.0, and we're dividing it equally between 2 people. So, each person owes:\nRs. 270.0 ÷ 2 = Rs. 135.0\n\nMaryam owes Rs. 135.0 because she's splitting the bill equally with Umayma. The total bill amount is Rs. 270.0, and since they're splitting it 50-50, Maryam pays half of the total amount, which is Rs. 135.0.\n\nUmayma also owes Rs. 135.0 for the same reason. She's splitting the bill equally with Maryam, so she pays half of the total amount, which is Rs. 135.0.\n\nIn simple words, Maryam and Umayma are splitting the bill equally, so they both owe Rs. 135.0 each. This amount covers their share of the biryani, tax, and no tip."
+  },
+  {
+    "id": "7ff9eb0e-af09-4a9e-926e-9a26b6228512",
+    "date": "2026-04-25 09:57:39",
+    "type": "image",
+    "split_type": "equal",
+    "num_people": 2,
+    "people_names": [],
+    "summary": [
+      {
+        "name": "Person 1",
+        "amount": 2568
+      },
+      {
+        "name": "Person 2",
+        "amount": 2568
+      }
+    ],
+    "explanation": "Hello! Let's break down the receipt and calculate the bill splitting.\n\n**Step 1: List all items, their quantities, and prices**\n\nHere are the items listed on the receipt:\n\n1. Cheese Burger (4) - Price: $5.99 each = 4 x $5.99 = $23.96 (we'll convert to PKR later)\n2. Soda (4) - Price: $0.49 each = 4 x $0.49 = $1.96 (we'll convert to PKR later)\n3. Cinnamon Bun (2) - Price: $1.00 each = 2 x $1.00 = $2.00 (we'll convert to PKR later)\n\n**Conversion to PKR:**\nAssuming an exchange rate of 1 USD = 160 PKR (for simplicity, as the actual rate may fluctuate), \nwe can convert the amounts:\n$23.96 ≈ Rs. 3,833.60\n$1.96 ≈ Rs. 313.60\n$2.00 ≈ Rs. 320.00\n\n**Step 2: Identify tax and tip if present**\n\nThe receipt shows:\n- Food Tax: $2.90 ≈ Rs. 464.00\n- Sales Tax: $1.28 ≈ Rs. 204.80\n\n**Step 3: Calculate the total in PKR**\n\nNet Subtotal: \nRs. 3,833.60 + Rs. 313.60 + Rs. 320.00 = Rs. 4,467.20\n\nTaxes:\nRs. 464.00 + Rs. 204.80 = Rs. 668.80\n\nTotal to Pay: \nRs. 4,467.20 + Rs. 668.80 = Rs. 5,136.00\n\n**Step 4: Split the bill based on the split type**\n\nNumber of people splitting: 2\nSplit type: Equal\n\n**Step 5: Calculate each person's share**\n\nTo find out how much each person owes, we'll divide the total by 2:\n\nRs. 5,136.00 ÷ 2 = Rs. 2,568.00\n\nSo, each person owes **Rs. 2,568.00**.\n\nThis amount is based on an equal split of the total bill, including taxes."
+  },
+  {
+    "id": "629b577a-24d5-4195-a411-7bd7963ff1c0",
+    "date": "2026-04-25 10:04:40",
+    "type": "manual",
+    "split_type": "equal",
+    "num_people": 2,
+    "people_names": [
+      "maria",
+      "maryam"
+    ],
+    "items": [
+      {
+        "name": "burgers",
+        "price": 1000.0,
+        "quantity": 1
+      }
+    ],
+    "tax": 30.0,
+    "tip": 0.0,
+    "summary": [
+      {
+        "name": "Maria",
+        "amount": 515.0
+      },
+      {
+        "name": "Maryam",
+        "amount": 515.0
+      }
+    ],
+    "explanation": "Let's break down the bill and calculate how much each person owes.\n\nFirst, we need to calculate the subtotal of all items. You've ordered 1 burger for Rs. 1000.0. \nSo, the subtotal is: Rs. 1000.0\n\nNext, we add the tax and tip to the subtotal. The tax is Rs. 30.0 and the tip is Rs. 0.0. \nSo, the total amount is: Rs. 1000.0 (subtotal) + Rs. 30.0 (tax) + Rs. 0.0 (tip) = Rs. 1030.0\n\nSince the split type is equal, we will divide the total amount equally among the 2 people: Maria and Maryam.\nEach person's share is: Rs. 1030.0 / 2 = Rs. 515.0\n\nSo, Maria owes Rs. 515.0 because she is sharing the total bill equally with Maryam. \nSimilarly, Maryam also owes Rs. 515.0 for the same reason.\n\nIn simple words, the total bill is Rs. 1030.0, and since they are splitting it equally, each person pays half of the total amount, which is Rs. 515.0."
+  },
+  {
+    "id": "ab3c2329-1f7c-4a0f-a3e5-03daa3da66ff",
+    "date": "2026-04-25 10:05:21",
+    "type": "image",
+    "split_type": "equal",
+    "num_people": 4,
+    "people_names": [],
+    "summary": [
+      {
+        "name": "Person 1",
+        "amount": 8.03
+      },
+      {
+        "name": "Person 2",
+        "amount": 8.03
+      },
+      {
+        "name": "Person 3",
+        "amount": 8.03
+      },
+      {
+        "name": "Person 4",
+        "amount": 8.03
+      }
+    ],
+    "explanation": "**Step 1: List all items, their quantities, and prices from the receipt in Rs.**\n\nTo proceed, we need to convert the given prices from USD to PKR. Assuming an exchange rate of 1 USD = 275 PKR (for simplicity, as the actual conversion rate may vary), \n\n- 4 Cheese Burgers = 4 * 5.99 USD = 23.96 USD\n- 4 Sodas = 4 * 0.49 USD = 1.96 USD\n- 2 Cinnamon Buns = 2 * 1.00 USD = 2.00 USD\n\nConverting to PKR (1 USD = 275 PKR):\n- 23.96 USD = 23.96 * 275 = 6,589 PKR\n- 1.96 USD = 1.96 * 275 = 539 PKR\n- 2.00 USD = 2 * 275 = 550 PKR\n\nHowever, to maintain consistency with your request for PKR and assuming direct conversion isn't the focus but rather understanding the bill in PKR, let's reassess directly in PKR as per your request, noting that direct USD to PKR conversion wasn't provided:\n\n| Item Name        | Quantity | Price (in a direct conversion context) |\n|------------------|----------|--------------------------------------|\n| Cheese Burger    | 4        | 5.99 USD * 275 PKR/USD = 1647.25 PKR |\n| Soda             | 4        | 0.49 USD * 275 PKR/USD = 134.75 PKR |\n| Cinnamon Bun     | 2        | 1.00 USD * 275 PKR/USD = 275 PKR    |\n\nLet's correctly note the items in PKR as per a more appropriate handling:\n- 4 Cheese Burgers = 23.96 USD or approximately 6,589 PKR\n- 4 Sodas = 1.96 USD or approximately 539 PKR\n- 2 Cinnamon Buns = 2 USD or approximately 550 PKR\n\n## Correct Approach Directly in Context:\nThe prices seem to have been initially considered in USD; however, we need to list and calculate directly:\n- Cheese Burgers: 4 * Rs. (Converted) = Let's assume conversion for calculation purposes.\n- Given exchange rates fluctuate, let's reassess focusing on given data translated:\n  - 4 Cheese Burgers = Rs. 23.96 * (If 1 USD = 275 PKR) \n  - Soda: \n  - Cinnamon Bun: \n\n## Assuming Direct Listing as Per Image (No direct PKR values):\n- 4 Cheese Burgers = 23.96\n- 4 Sodas = 1.96\n- 2 Cinnamon Buns = 2.00\n\n## Total of Items: \n23.96 + 1.96 + 2.00 = 27.92\n\n## Tax Details:\n- Food Tax: 2.90\n- Sales Tax: 1.28\n\n## Step 2 & 3: Identify tax and tip, calculate the total in Rs.\n- **Subtotal:** Rs. 27.92\n- **Taxes:** \n  - Food Tax: Rs. 2.90\n  - Sales Tax: Rs. 1.28\n  - **Total Tax:** Rs. 2.90 + Rs. 1.28 = Rs. 4.18\n- **Total:** Rs. 27.92 (Subtotal) + Rs. 4.18 (Tax) = Rs. 32.10\n\n## No tip is mentioned or included.\n\n## Step 4 & 5: Split the bill based on the split type and explain how much each person owes.\n- **Number of people splitting:** 4\n- **Split type:** Equal\n\n## Total Bill: Rs. 32.10\nTo find out how much each person owes:\n- **Total Bill / Number of People:** Rs. 32.10 / 4 = Rs. 8.025\n\n## Each person owes approximately: Rs. 8.03\n\nThe reason each person owes Rs. 8.03 is that the total bill of Rs. 32.10 is divided equally among 4 people. This ensures everyone contributes a fair share of the total cost."
+  },
+  {
+    "id": "59650ad3-696b-4254-9357-200ecf0599ae",
+    "date": "2026-04-25 10:11:19",
+    "type": "image",
+    "split_type": "equal",
+    "num_people": 2,
+    "people_names": [],
+    "items": [
+      {
+        "name": "Cheese Burger",
+        "price": 1642.25,
+        "quantity": 4
+      },
+      {
+        "name": "Soda",
+        "price": 134.75,
+        "quantity": 4
+      },
+      {
+        "name": "Cinnamon Bun",
+        "price": 275,
+        "quantity": 2
+      }
+    ],
+    "tax": 407.5,
+    "tip": 0.0,
+    "summary": [
+      {
+        "name": "Person 1",
+        "amount": 4032.75
+      },
+      {
+        "name": "Person 2",
+        "amount": 4032.75
+      }
+    ],
+    "explanation": "\nSubtotal: Rs. 7658.00\nTax: Rs. 407.50\nTip: Rs. 0.00\nTotal: Rs. 8065.50\n\nSplit type: equal\n\nEach person owes:\nPerson 1: Rs. 4032.75\nPerson 2: Rs. 4032.75"
+  },
+  {
+    "id": "a8fffb8b-1470-49bf-a68f-734774d1ea09",
+    "date": "2026-04-25 10:14:57",
+    "type": "image",
+    "split_type": "equal",
+    "num_people": 2,
+    "people_names": [],
+    "items": [
+      {
+        "name": "Cheese Burger",
+        "price": 1647.25,
+        "quantity": 4
+      },
+      {
+        "name": "Soda",
+        "price": 134.75,
+        "quantity": 4
+      },
+      {
+        "name": "Cinnamon Bun",
+        "price": 275.0,
+        "quantity": 2
+      }
+    ],
+    "tax": 1149.5,
+    "tip": 0.0,
+    "summary": [
+      {
+        "name": "Person 1",
+        "amount": 4413.75
+      },
+      {
+        "name": "Person 2",
+        "amount": 4413.75
+      }
+    ],
+    "explanation": "\nSubtotal: Rs. 7678.00\nTax: Rs. 1149.50\nTip: Rs. 0.00\nTotal: Rs. 8827.50\n\nSplit type: equal\n\nEach person owes:\nPerson 1: Rs. 4413.75\nPerson 2: Rs. 4413.75"
+  }
+]

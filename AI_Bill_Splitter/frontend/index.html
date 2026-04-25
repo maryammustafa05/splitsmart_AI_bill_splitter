@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SplitSmart — AI Bill Splitter</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0e17;
+    --surface: #1a1928;
+    --card: #211f35;
+    --accent: #ff6b6b;
+    --accent2: #ffd93d;
+    --accent3: #6bcb77;
+    --accent4: #4d96ff;
+    --text: #fffffe;
+    --muted: #a7a9be;
+    --border: rgba(255,255,255,0.08);
+    --radius: 20px;
+    --shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background blobs */
+  body::before {
+    content: '';
+    position: fixed;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(255,107,107,0.12) 0%, transparent 70%);
+    top: -200px; right: -200px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(77,150,255,0.1) 0%, transparent 70%);
+    bottom: -100px; left: -100px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(15,14,23,0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+background-clip: text;
+-webkit-text-fill-color: transparent;
+  }
+  .nav-tabs {
+    display: flex; gap: 8px;
+    background: var(--surface);
+    padding: 6px;
+    border-radius: 50px;
+    border: 1px solid var(--border);
+  }
+  .nav-tab {
+    padding: 8px 20px;
+    border-radius: 50px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .nav-tab.active {
+    background: linear-gradient(135deg, var(--accent), #ff8e53);
+    color: white;
+  }
+
+  /* MAIN */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 120px 24px 60px;
+    position: relative; z-index: 1;
+  }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    margin-bottom: 60px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,107,107,0.15);
+    border: 1px solid rgba(255,107,107,0.3);
+    color: var(--accent);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .hero h1 span {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+background-clip: text;
+-webkit-text-fill-color: transparent;
+  }
+  .hero p {
+    color: var(--muted);
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* PAGES */
+  .page { display: none; animation: fadeUp 0.5s ease both; }
+  .page.active { display: block; }
+
+  /* CARD */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+  }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-title .icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+
+  /* FORM ELEMENTS */
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .form-group { margin-bottom: 16px; }
+  label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  input, select {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input:focus, select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(255,107,107,0.1);
+  }
+  select option { background: var(--card); }
+
+  /* ITEMS */
+  .items-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+  .item-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    gap: 10px;
+    align-items: center;
+    background: var(--surface);
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    animation: fadeUp 0.3s ease both;
+  }
+  .item-row input { background: transparent; border: none; padding: 4px 8px; }
+  .item-row input:focus { box-shadow: none; border-bottom: 1px solid var(--accent); border-radius: 0; }
+  .remove-btn {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    border: none;
+    background: rgba(255,107,107,0.15);
+    color: var(--accent);
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .remove-btn:hover { background: var(--accent); color: white; }
+
+  /* BUTTONS */
+  .btn {
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), #ff8e53);
+    color: white;
+    width: 100%;
+    justify-content: center;
+    font-size: 1rem;
+    padding: 16px;
+    margin-top: 8px;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(255,107,107,0.3);
+  }
+  .btn-primary:disabled {
+    opacity: 0.6;
+    transform: none;
+    cursor: not-allowed;
+  }
+  .btn-secondary {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* UPLOAD ZONE */
+  .upload-zone {
+    border: 2px dashed var(--border);
+    border-radius: var(--radius);
+    padding: 60px 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--surface);
+    position: relative;
+  }
+  .upload-zone:hover, .upload-zone.dragover {
+    border-color: var(--accent);
+    background: rgba(255,107,107,0.05);
+  }
+  .upload-zone input[type="file"] {
+    position: absolute; inset: 0;
+    opacity: 0; cursor: pointer;
+    width: 100%; height: 100%;
+  }
+  .upload-icon { font-size: 3rem; margin-bottom: 16px; }
+  .upload-zone h3 { font-size: 1.1rem; margin-bottom: 8px; }
+  .upload-zone p { color: var(--muted); font-size: 0.9rem; }
+  .preview-img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 12px;
+    margin-top: 16px;
+    display: none;
+  }
+
+  /* RESULT */
+  .result-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-top: 24px;
+    animation: fadeUp 0.5s ease both;
+    display: none;
+  }
+  .result-card.show { display: block; }
+  .result-header {
+    background: linear-gradient(135deg, var(--accent), #ff8e53);
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .result-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+  }
+  .result-body { padding: 28px; }
+
+  /* SUMMARY CARDS */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .person-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  .person-card:hover { transform: translateY(-4px); }
+  .person-avatar {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 auto 12px;
+    font-family: 'Playfair Display', serif;
+  }
+  .person-name {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .person-amount {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  /* EXPLANATION */
+  .explanation-box {
+    background: var(--surface);
+    border-radius: 14px;
+    padding: 20px;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--muted);
+    white-space: pre-wrap;
+    border: 1px solid var(--border);
+  }
+
+  /* HISTORY */
+  .history-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.2s;
+    animation: fadeUp 0.4s ease both;
+  }
+  .history-item:hover {
+    border-color: var(--accent);
+    transform: translateX(4px);
+  }
+  .history-left { display: flex; align-items: center; gap: 16px; }
+  .history-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .history-meta h4 { font-size: 0.95rem; margin-bottom: 4px; }
+  .history-meta p { font-size: 0.82rem; color: var(--muted); }
+  .history-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent2);
+  }
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+  }
+  .empty-state .emoji { font-size: 3rem; margin-bottom: 16px; }
+
+  /* LOADING */
+  .loading-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(15,14,23,0.85);
+    backdrop-filter: blur(10px);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .loading-overlay.show { display: flex; }
+  .spinner {
+    width: 50px; height: 50px;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  .loading-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--muted);
+  }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 30px; right: 30px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 24px;
+    display: flex; align-items: center; gap: 12px;
+    z-index: 300;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    max-width: 350px;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast.error { border-color: var(--accent); }
+  .toast.success { border-color: var(--accent3); }
+
+  /* COLORS */
+  .colors { --c1: #ff6b6b; --c2: #4d96ff; --c3: #6bcb77; --c4: #ffd93d; --c5: #ff9f43; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* DIVIDER */
+  .divider {
+    display: flex; align-items: center; gap: 12px;
+    color: var(--muted); font-size: 0.85rem;
+    margin: 20px 0;
+  }
+  .divider::before, .divider::after {
+    content: ''; flex: 1;
+    height: 1px; background: var(--border);
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 16px 20px; }
+    .logo { font-size: 1.3rem; }
+    .nav-tab { padding: 7px 14px; font-size: 0.8rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .item-row { grid-template-columns: 1fr 1fr auto; }
+    .item-row input:nth-child(3) { display: none; }
+    main { padding: 100px 16px 40px; }
+    .card { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">SplitSmart</div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchPage('manual')">Manual</button>
+    <button class="nav-tab" onclick="switchPage('image')">Receipt</button>
+    <button class="nav-tab" onclick="switchPage('history')">History</button>
+  </div>
+</nav>
+
+<!-- LOADING -->
+<div class="loading-overlay" id="loading">
+  <div class="spinner"></div>
+  <div class="loading-text">AI is calculating....</div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span id="toast-icon"></span>
+  <span id="toast-msg">Done!</span>
+</div>
+
+<main>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">Powered by AI</div>
+    <h1>Split bills <span>smartly</span>,<br>not awkwardly.</h1>
+    <p>Upload a receipt or enter items manually — our AI handles the math and explains everything clearly.</p>
+  </div>
+
+  <!-- MANUAL PAGE -->
+  <div class="page active" id="page-manual">
+    <div class="card">
+      <div class="card-title">
+        <div class="icon" style="background:rgba(255,107,107,0.15)"></div>
+        Enter Bill Details
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Number of People</label>
+          <input type="number" id="num-people" min="1" max="20" value="2" placeholder="2">
+        </div>
+        <div class="form-group">
+          <label>Split Type</label>
+          <select id="split-type">
+            <option value="equal">Equal Split</option>
+            <option value="itemized">Itemized Split</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>People Names (optional, comma separated)</label>
+        <input type="text" id="people-names" placeholder="e.g. Maryam, Umaima, Rehma">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Tax (Rs.)</label>
+          <input type="number" id="tax" min="0" value="0" placeholder="0">
+        </div>
+        <div class="form-group">
+          <label>Tip (Rs.)</label>
+          <input type="number" id="tip" min="0" value="0" placeholder="0">
+        </div>
+      </div>
+
+      <div class="divider">Items</div>
+
+      <div class="items-list" id="items-list">
+        <div class="item-row">
+          <input type="text" placeholder="Item name" class="item-name">
+          <input type="number" placeholder="Price" class="item-price" min="0">
+          <input type="number" placeholder="Qty" class="item-qty" min="1" value="1">
+          <button class="remove-btn" onclick="removeItem(this)">✕</button>
+        </div>
+      </div>
+
+      <button class="btn btn-secondary" onclick="addItem()" style="margin-bottom:16px">
+        + Add Item
+      </button>
+
+      <button class="btn btn-primary" onclick="submitManual()" id="manual-btn">
+        ✨ Calculate Split
+      </button>
+    </div>
+
+    <!-- RESULT -->
+    <div class="result-card" id="manual-result">
+      <div class="result-header">
+        <h3>Bill Split Result</h3>
+        <span id="manual-total-badge" style="background:rgba(255,255,255,0.2);padding:4px 14px;border-radius:50px;font-size:0.9rem;"></span>
+      </div>
+      <div class="result-body">
+        <div class="summary-grid" id="manual-summary"></div>
+        <div class="divider">Full Explanation</div>
+        <div class="explanation-box" id="manual-explanation"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMAGE PAGE -->
+  <div class="page" id="page-image">
+    <div class="card">
+      <div class="card-title">
+        <div class="icon" style="background:rgba(77,150,255,0.15)">📸</div>
+        Upload Receipt
+      </div>
+
+      <div class="upload-zone" id="upload-zone">
+        <input type="file" id="receipt-file" accept="image/*" onchange="handleFileSelect(this)">
+        <div class="upload-icon">🧾</div>
+        <h3>Drop your receipt here</h3>
+        <p>or click to browse — JPG, PNG, WEBP supported</p>
+        <img class="preview-img" id="preview-img" alt="Receipt preview">
+      </div>
+
+      <div style="height:16px"></div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Number of People</label>
+          <input type="number" id="img-num-people" min="1" max="20" value="2">
+        </div>
+        <div class="form-group">
+          <label>Split Type</label>
+          <select id="img-split-type">
+            <option value="equal">Equal Split</option>
+            <option value="itemized">Itemized Split</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>People Names (optional)</label>
+        <input type="text" id="img-people-names" placeholder="e.g. Ali, Sara, Ahmed">
+      </div>
+
+      <button class="btn btn-primary" onclick="submitImage()" id="image-btn">
+        Scan & Split Receipt
+      </button>
+    </div>
+
+    <div class="result-card" id="image-result">
+      <div class="result-header">
+        <h3>Receipt Analysis</h3>
+        <span id="image-total-badge" style="background:rgba(255,255,255,0.2);padding:4px 14px;border-radius:50px;font-size:0.9rem;"></span>
+      </div>
+      <div class="result-body">
+        <div class="summary-grid" id="image-summary"></div>
+        <div class="divider">Full Explanation</div>
+        <div class="explanation-box" id="image-explanation"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HISTORY PAGE -->
+  <div class="page" id="page-history">
+    <div class="card">
+      <div class="card-title">
+        <div class="icon" style="background:rgba(107,203,119,0.15)">📋</div>
+        Expense History
+      </div>
+      <div id="history-list">
+        <div class="empty-state">
+          <div class="emoji">🕐</div>
+          <p>Loading history...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+const API = 'http://127.0.0.1:8000';
+const AVATAR_COLORS = ['#ff6b6b','#4d96ff','#6bcb77','#ffd93d','#ff9f43','#a78bfa','#f472b6'];
+
+// PAGE SWITCHING
+function switchPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  event.target.classList.add('active');
+  if (page === 'history') loadHistory();
+}
+
+// TOAST
+function showToast(msg, type = 'success') {
+  const toast = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  document.getElementById('toast-icon').textContent = type === 'success' ? '✅' : '❌';
+  toast.className = 'toast show ' + type;
+  setTimeout(() => toast.className = 'toast', 3500);
+}
+
+// LOADING
+function setLoading(show) {
+  document.getElementById('loading').classList.toggle('show', show);
+}
+
+// ADD / REMOVE ITEMS
+function addItem() {
+  const list = document.getElementById('items-list');
+  const row = document.createElement('div');
+  row.className = 'item-row';
+  row.innerHTML = `
+    <input type="text" placeholder="Item name" class="item-name">
+    <input type="number" placeholder="Price" class="item-price" min="0">
+    <input type="number" placeholder="Qty" class="item-qty" min="1" value="1">
+    <button class="remove-btn" onclick="removeItem(this)">✕</button>
+  `;
+  list.appendChild(row);
+}
+
+function removeItem(btn) {
+  const rows = document.querySelectorAll('.item-row');
+  if (rows.length > 1) btn.closest('.item-row').remove();
+  else showToast('Need at least one item!', 'error');
+}
+
+// RENDER SUMMARY
+function renderSummary(summary, containerId) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  if (!summary || summary.length === 0) return;
+  summary.forEach((person, i) => {
+    const color = AVATAR_COLORS[i % AVATAR_COLORS.length];
+    const initial = person.name ? person.name[0].toUpperCase() : '?';
+    container.innerHTML += `
+      <div class="person-card">
+        <div class="person-avatar" style="background:${color}22;color:${color}">${initial}</div>
+        <div class="person-name">${person.name}</div>
+        <div class="person-amount">Rs. ${person.amount.toLocaleString()}</div>
+      </div>
+    `;
+  });
+}
+
+// MANUAL SUBMIT
+async function submitManual() {
+  const items = [];
+  document.querySelectorAll('.item-row').forEach(row => {
+    const name = row.querySelector('.item-name').value.trim();
+    const price = parseFloat(row.querySelector('.item-price').value) || 0;
+    const qty = parseInt(row.querySelector('.item-qty').value) || 1;
+    if (name) items.push({ name, price, quantity: qty });
+  });
+
+  if (items.length === 0) return showToast('Please add at least one item!', 'error');
+
+  const numPeople = parseInt(document.getElementById('num-people').value) || 2;
+  const splitType = document.getElementById('split-type').value;
+  const tax = parseFloat(document.getElementById('tax').value) || 0;
+  const tip = parseFloat(document.getElementById('tip').value) || 0;
+  const namesRaw = document.getElementById('people-names').value;
+  const peopleNames = namesRaw ? namesRaw.split(',').map(n => n.trim()).filter(Boolean) : [];
+
+  setLoading(true);
+  try {
+    const res = await fetch(`${API}/split/manual`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ num_people: numPeople, split_type: splitType, items, tax, tip, people_names: peopleNames })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error('API error');
+
+    renderSummary(data.summary, 'manual-summary');
+    document.getElementById('manual-explanation').textContent = data.explanation;
+    const total = data.summary ? data.summary.reduce((s, p) => s + p.amount, 0) : 0;
+    document.getElementById('manual-total-badge').textContent = `Total: Rs. ${total.toLocaleString()}`;
+    document.getElementById('manual-result').classList.add('show');
+    document.getElementById('manual-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    showToast('Bill split successfully!');
+  } catch (e) {
+    showToast('Something went wrong. Try again.', 'error');
+  } finally {
+    setLoading(false);
+  }
+}
+
+// FILE SELECT
+function handleFileSelect(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const img = document.getElementById('preview-img');
+  img.src = URL.createObjectURL(file);
+  img.style.display = 'block';
+  document.querySelector('.upload-zone .upload-icon').style.display = 'none';
+  document.querySelector('.upload-zone h3').textContent = file.name;
+  document.querySelector('.upload-zone p').textContent = `${(file.size / 1024).toFixed(1)} KB`;
+}
+
+// IMAGE SUBMIT
+async function submitImage() {
+  const file = document.getElementById('receipt-file').files[0];
+  if (!file) return showToast('Please upload a receipt image!', 'error');
+
+  const numPeople = parseInt(document.getElementById('img-num-people').value) || 2;
+  const splitType = document.getElementById('img-split-type').value;
+  const namesRaw = document.getElementById('img-people-names').value;
+
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('num_people', numPeople);
+  formData.append('split_type', splitType);
+  formData.append('people_names', namesRaw);
+
+  setLoading(true);
+  try {
+    const res = await fetch(`${API}/split/image`, { method: 'POST', body: formData });
+    const data = await res.json();
+    if (!res.ok) throw new Error('API error');
+
+    renderSummary(data.summary, 'image-summary');
+    document.getElementById('image-explanation').textContent = data.explanation;
+    const total = data.summary ? data.summary.reduce((s, p) => s + p.amount, 0) : 0;
+    document.getElementById('image-total-badge').textContent = `Total: Rs. ${total.toLocaleString()}`;
+    document.getElementById('image-result').classList.add('show');
+    document.getElementById('image-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    showToast('Receipt scanned successfully!');
+  } catch (e) {
+    showToast('Something went wrong. Try again.', 'error');
+  } finally {
+    setLoading(false);
+  }
+}
+
+// HISTORY
+async function loadHistory() {
+  const container = document.getElementById('history-list');
+  try {
+    const res = await fetch(`${API}/history`);
+    const data = await res.json();
+    if (!data.history || data.history.length === 0) {
+      container.innerHTML = `<div class="empty-state"><div class="emoji">📭</div><p>No expense history yet.<br>Split your first bill!</p></div>`;
+      return;
+    }
+    container.innerHTML = data.history.slice().reverse().map((item, i) => {
+      const total = item.summary ? item.summary.reduce((s, p) => s + p.amount, 0) : 0;
+      const names = item.people_names && item.people_names.length > 0
+        ? item.people_names.join(', ')
+        : `${item.num_people} people`;
+      const icon = item.type === 'image' ? '📸' : '✏️';
+      const color = item.type === 'image' ? 'rgba(77,150,255,0.15)' : 'rgba(255,107,107,0.15)';
+      return `
+        <div class="history-item" style="animation-delay:${i * 0.05}s">
+          <div class="history-left">
+            <div class="history-icon" style="background:${color}">${icon}</div>
+            <div class="history-meta">
+              <h4>${names}</h4>
+              <p>${item.date} · ${item.split_type} split · ${item.num_people} people</p>
+            </div>
+          </div>
+          <div class="history-amount">Rs. ${total.toLocaleString()}</div>
+        </div>
+      `;
+    }).join('');
+  } catch (e) {
+    container.innerHTML = `<div class="empty-state"><div class="emoji">❌</div><p>Could not load history.<br>Make sure backend is running.</p></div>`;
+  }
+}
+
+// DRAG & DROP
+const zone = document.getElementById('upload-zone');
+zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+zone.addEventListener('drop', e => {
+  e.preventDefault();
+  zone.classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) {
+    const input = document.getElementById('receipt-file');
+    const dt = new DataTransfer();
+    dt.items.add(file);
+    input.files = dt.files;
+    handleFileSelect(input);
+  }
+});
+</script>
+</body>
+</html>
