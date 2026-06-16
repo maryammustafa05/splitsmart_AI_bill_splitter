@@ -5,7 +5,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from fastapi import APIRouter
 from pydantic import BaseModel
 from typing import List
-from services.claude_service import split_manual_bill
+from services.service import split_manual_bill
 
 router = APIRouter()
 
