@@ -4,7 +4,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from fastapi import APIRouter, UploadFile, File, Form
 from typing import Optional
-from services.claude_service import split_image_bill
+from services.service import split_image_bill
 
 router = APIRouter()
 
