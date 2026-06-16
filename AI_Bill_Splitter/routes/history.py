@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from services.claude_service import get_expense_history
+from services.service import get_expense_history
 
 router = APIRouter()
 
